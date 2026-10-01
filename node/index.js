@@ -12,7 +12,7 @@ const path = require("path");
 let uri = process.env.URL;
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://nairanest.vercel.app"], // Allow only these origins
+  origin: ["http://localhost:5173", "https://bank-app-one-xi.vercel.app"], // Allow only these origins
   credentials: true, // If using cookies/auth
 };
 app.use(cors(corsOptions));
