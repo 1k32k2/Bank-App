@@ -1,9 +1,9 @@
 import './App.css'
 import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from './Components/Signup';
-import { Toaster } from "react-hot-toast";
 import Homepage from './Components/Pages/Homepage';
 import Login from './Components/Login';
+import { Toaster, ToastBar } from "react-hot-toast";
 import FullPageLoader from './Components/FullPageLoader';
 import { useEffect, useState } from 'react';
 import ResetPassword from './Components/ResetPassword';
@@ -25,6 +25,18 @@ import AdminOverview from './Components/AdminOverview';
 
 
 
+const getToastElementId = (toast) => {
+  const message = typeof toast.message === 'string' ? toast.message : toast.type;
+  const messageSlug = message
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 48) || toast.type;
+  const uniqueToastId = toast.id.replace(/[^a-zA-Z0-9_-]/g, '-');
+
+  return `toast-${toast.type}-${messageSlug}-${uniqueToastId}`;
+};
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -41,7 +53,21 @@ function App() {
   console.log("App component rendered");
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false}>
+        {(toast) => (
+          <ToastBar toast={toast}>
+            {({ icon, message }) => (
+              <span
+                id={getToastElementId(toast)}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                {icon}
+                {message}
+              </span>
+            )}
+          </ToastBar>
+        )}
+      </Toaster>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/home" element={<Navigate to="/" />} />

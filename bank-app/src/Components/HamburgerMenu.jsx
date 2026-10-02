@@ -11,8 +11,9 @@ const HamburgerMenu = ({ user }) => {
   };
 
   return (
-    <div className="hamburger-menu">
+    <div className="hamburger-menu" id="mobile-navigation">
       <button
+      id="mobile-menu-toggle"
         className={`hamburger-icon ${isOpen ? "open" : ""}`}
         onClick={toggleMenu}
         aria-expanded={isOpen}
@@ -23,10 +24,11 @@ const HamburgerMenu = ({ user }) => {
         <span className="line"></span>
       </button>
 
-      <div className={`menu-overlay ${isOpen ? "open" : ""}`}>
-        <ul className="menu">
+      <div id="mobile-menu" className={`menu-overlay ${isOpen ? "open" : ""}`}>
+        <ul id="mobile-menu-links" className="menu">
           <li>
             <NavLink
+              id="mobile-nav-about"
               to="/"
               className={pathname === "/" ? "active-link" : ""}
               onClick={toggleMenu}
@@ -36,6 +38,7 @@ const HamburgerMenu = ({ user }) => {
           </li>
           <li>
             <NavLink
+              id="mobile-nav-services"
               to="/services"
               className={pathname === "/services" ? "active-link" : ""}
               onClick={toggleMenu}
@@ -45,6 +48,7 @@ const HamburgerMenu = ({ user }) => {
           </li>
           <li>
             <NavLink
+              id="mobile-nav-contact"
               to="/client"
               className={pathname === "/client" ? "active-link" : ""}
               onClick={toggleMenu}
@@ -55,6 +59,7 @@ const HamburgerMenu = ({ user }) => {
           {user ? (
             <li>
               <NavLink
+                id="mobile-nav-dashboard"
                 to="/dashboard/user"
                 className={pathname === "/dashboard/user" ? "active-link" : ""}
                 onClick={toggleMenu}
@@ -66,6 +71,7 @@ const HamburgerMenu = ({ user }) => {
             <>
               <li>
                 <NavLink
+                  id="mobile-nav-signup"
                   to="/signup"
                   className={pathname === "/signup" ? "active-link" : ""}
                   onClick={toggleMenu}
@@ -75,6 +81,7 @@ const HamburgerMenu = ({ user }) => {
               </li>
               <li>
                 <NavLink
+                  id="mobile-nav-login"
                   to="/login"
                   className={pathname === "/login" ? "active-link" : ""}
                   onClick={toggleMenu}

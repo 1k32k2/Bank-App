@@ -46,10 +46,10 @@ const ResetSuccess = () => {
   };
 
   return (
-    <Container>
+    <Container id="reset-success-page">
       <Icon />
       <Message>Your Password has been Reset Successfully!</Message>
-      <Button onClick={handleLoginRedirect}>Go to Login</Button>
+      <Button id="reset-success-login-button" onClick={handleLoginRedirect}>Go to Login</Button>
     </Container>
   );
 };

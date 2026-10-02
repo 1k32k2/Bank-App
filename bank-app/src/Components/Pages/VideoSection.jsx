@@ -16,7 +16,8 @@ const VideoSection = () => {
     <div>
       <div>
         {/* Video Placeholder */}
-        <div
+          <div
+            id="homepage-video-thumbnail"
           style={{
             position: "relative",
             width: "100%",
@@ -33,6 +34,7 @@ const VideoSection = () => {
           
           <div className="pulse-button">
             <span
+             id="homepage-video-play"
              onClick={handleOpen}
             >
                <IoPlay />
@@ -43,9 +45,10 @@ const VideoSection = () => {
       </div>
 
       {/* Modal for Video */}
-      <Modal open={open} onClose={handleClose}>
+      <Modal id="homepage-video-modal" open={open} onClose={handleClose}>
         
         <div
+          id="homepage-video-dialog"
           style={{
             position: "absolute",
             top: "50%",
@@ -57,6 +60,7 @@ const VideoSection = () => {
           }}
         >
           <iframe
+            id="homepage-video-frame"
             width="100%"
             height="162"
             src="https://www.youtube.com/embed/7e90gBu4pas?si=G3PZM18fgmqMGbeX?autoplay=1" 
@@ -67,6 +71,7 @@ const VideoSection = () => {
           ></iframe>
 
          <CloseIcon
+          id="homepage-video-close"
             onClick={handleClose}
             style={{
                 position: "absolute",

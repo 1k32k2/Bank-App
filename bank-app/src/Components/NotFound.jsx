@@ -46,10 +46,10 @@ const NotFound = () => {
   };
 
   return (
-    <Container>
+    <Container id="not-found-page">
       <Message>404 - Not Found</Message>
       <SubMessage>Sorry, the page you&#39;re looking for doesn&#39;t exist.</SubMessage>
-      <Button onClick={handleHomeRedirect}>Go to Homepage</Button>
+      <Button id="not-found-home-button" onClick={handleHomeRedirect}>Go to Homepage</Button>
     </Container>
   );
 };

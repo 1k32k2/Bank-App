@@ -51,7 +51,7 @@ const ForgotPassword = () => {
 
     return (
 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", margin: "0 1rem" }}>
+        <div id="forgot-password-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", margin: "0 1rem" }}>
             <div className="form-container" style={{padding: "32px 55px 20px 55px", width: "100%", maxWidth: "600px"}}>
                 <div className="logo-container">
                     <h1 style={{ color: "#4a90e2", fontSize: "1.65rem" }}>Forgot your password?</h1>
@@ -59,10 +59,11 @@ const ForgotPassword = () => {
                 </div>
 
 
-                <form onSubmit={handleSubmit} className="form">
+                <form id="forgot-password-form" onSubmit={handleSubmit} className="form">
                     <div className="form-group" style={{margin: ".5rem 0 1rem 0"}}>
-                        <label htmlFor="email" style={{fontSize: ".9rem", fontWeight: "500", color: "#78838f"}}>Enter your email address</label>
+                        <label htmlFor="forgot-password-email" style={{fontSize: ".9rem", fontWeight: "500", color: "#78838f"}}>Enter your email address</label>
                         <input
+                            id="forgot-password-email"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -71,6 +72,7 @@ const ForgotPassword = () => {
                     </div>
 
                     <LoadingButton 
+                        id="forgot-password-submit"
                         className="form-submit-btn" 
                         type="submit"
                         disabled={loadingBtn}
@@ -79,6 +81,7 @@ const ForgotPassword = () => {
                     </LoadingButton>
 
                     <Link 
+                    id="forgot-password-login-link"
                     to="/login"
                     style=
                     {{ 

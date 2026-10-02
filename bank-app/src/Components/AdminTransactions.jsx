@@ -27,10 +27,10 @@ const AdminTransactions = () => {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box id="admin-transactions-page" sx={{ p: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>All Transactions</Typography>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer id="admin-transactions-table-container" component={Paper}>
+        <Table id="admin-transactions-table">
           <TableHead>
             <TableRow>
               <TableCell>User</TableCell>
@@ -41,7 +41,7 @@ const AdminTransactions = () => {
           </TableHead>
           <TableBody>
             {transactions.map((t) => (
-              <TableRow key={t._id}>
+              <TableRow id={`admin-transaction-row-${t._id}`} key={t._id}>
                 <TableCell>{t.userId?.firstName} {t.userId?.lastName} ({t.userId?.accountNumber})</TableCell>
                 <TableCell>{t.type}</TableCell>
                 <TableCell>₦{t.amount}</TableCell>

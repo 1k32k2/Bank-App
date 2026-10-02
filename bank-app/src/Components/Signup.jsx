@@ -156,6 +156,7 @@ const Signup = () => {
                 <Box sx={{ width: '90%', maxWidth: 500 }}>
                     <h1 style={{ fontSize: "1.7rem", marginBottom: "1rem" }}>Sign Up</h1>
                     <Box
+                        id="signup-form"
                         onSubmit={formik.handleSubmit}
                         component="form"
                         sx={{
@@ -235,6 +236,7 @@ const Signup = () => {
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <IconButton
+                                                    id="signup-password-toggle"
                                                     aria-label='toggle password visibility'
                                                     onClick={handleClickShowPassword}
                                                     onMouseDown={handleMouseDownPassword}
@@ -256,6 +258,7 @@ const Signup = () => {
                         </Grid>
 
                         <LoadingButton
+                            id="signup-submit"
                             loading={formik.isSubmitting}
                             loadingIndicator={loadingMessage}
                             disabled={!formik.isValid || formik.isSubmitting}
@@ -273,7 +276,7 @@ const Signup = () => {
                         </LoadingButton>
 
                     </Box>
-                    <p style={{ color: "#92a4af", textAlign: "center" }}>Already have an account? <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}><span style={{ color: "#4a90e2" }} className='link'>Login</span></Link></p>
+                    <p style={{ color: "#92a4af", textAlign: "center" }}>Already have an account? <Link id="signup-login-link" to="/login" style={{ textDecoration: "none", color: "inherit" }}><span style={{ color: "#4a90e2" }} className='link'>Login</span></Link></p>
                 </Box>
             </Grid>
         </Grid>

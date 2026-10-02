@@ -10,7 +10,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const TestimonialSection = () => {
   return (
-    <div className="testimonial-section">
+    <div id="testimonials-section" className="testimonial-section">
       <h1 style={{ fontSize: "2.2rem", marginBottom: ".6rem", fontWeight: "500" }}>
         What people are saying about NairaNest
       </h1>
@@ -27,6 +27,7 @@ const TestimonialSection = () => {
         A payments experience people love to talk about
       </p>
       <Swiper
+        id="testimonials-carousel"
         modules={[Autoplay, Navigation, Pagination]}
         navigation={{
           nextEl: '.custom-next',
@@ -104,11 +105,11 @@ const TestimonialSection = () => {
           </div>
         </SwiperSlide>
 
-        <span className="custom-prev"><FaAngleLeft style={{ fontSize: "1.3rem" }} /></span>
-        <span className="custom-next"><FaAngleRight style={{ fontSize: "1.3rem" }} /></span>
+        <span id="testimonials-previous" className="custom-prev"><FaAngleLeft style={{ fontSize: "1.3rem" }} /></span>
+        <span id="testimonials-next" className="custom-next"><FaAngleRight style={{ fontSize: "1.3rem" }} /></span>
       </Swiper>
-      <div className="custom-dots"></div>
-      <a style={{ color: "#1976d2", fontSize: "1.1rem", cursor: "pointer" }}>See more people review &gt;</a>
+      <div id="testimonials-pagination" className="custom-dots"></div>
+      <a id="testimonials-more-link" style={{ color: "#1976d2", fontSize: "1.1rem", cursor: "pointer" }}>See more people review &gt;</a>
     </div>
   );
 };

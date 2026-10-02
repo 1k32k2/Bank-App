@@ -40,11 +40,12 @@ const Settings = () => {
 
   return (
     <>
-      <Box sx={{ maxWidth: '600px', margin: '0 auto' }}>
+      <Box id="settings-page" sx={{ maxWidth: '600px', margin: '0 auto' }}>
         <Typography variant="h5" sx={{ mb: 3 }}>Settings</Typography>
         <Card sx={{ p: 3 }}>
           <Typography variant="h6" sx={{ mb: 2 }}>Change Password</Typography>
           <TextField
+            id="settings-old-password"
             fullWidth
             label="Old Password"
             type={showOldPassword ? 'text' : 'password'}
@@ -55,6 +56,7 @@ const Settings = () => {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
+                    id="settings-old-password-toggle"
                     aria-label="toggle password visibility"
                     onClick={() => setShowOldPassword(!showOldPassword)}
                     edge="end"
@@ -66,6 +68,7 @@ const Settings = () => {
             }}
           />
           <TextField
+            id="settings-new-password"
             fullWidth
             label="New Password"
             type={showNewPassword ? 'text' : 'password'}
@@ -76,6 +79,7 @@ const Settings = () => {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
+                    id="settings-new-password-toggle"
                     aria-label="toggle password visibility"
                     onClick={() => setShowNewPassword(!showNewPassword)}
                     edge="end"
@@ -87,6 +91,7 @@ const Settings = () => {
             }}
           />
           <TextField
+            id="settings-confirm-password"
             fullWidth
             label="Confirm New Password"
             type={showConfirmPassword ? 'text' : 'password'}
@@ -97,6 +102,7 @@ const Settings = () => {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
+                    id="settings-confirm-password-toggle"
                     aria-label="toggle password visibility"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     edge="end"
@@ -107,7 +113,7 @@ const Settings = () => {
               ),
             }}
           />
-          <Button variant="contained" onClick={handlePasswordChange}>Update Password</Button>
+          <Button id="settings-update-password" variant="contained" onClick={handlePasswordChange}>Update Password</Button>
         </Card>
       </Box>
     </>

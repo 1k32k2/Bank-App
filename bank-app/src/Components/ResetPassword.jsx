@@ -56,13 +56,13 @@ const ResetPassword = () => {
 
     return (
 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", margin: "0" }}>
+        <div id="reset-password-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", margin: "0" }}>
             <div className="form-container">
                 <div className="logo-container" style={{color: "#4a90e2"}}>
                     Reset Password
                 </div>
 
-                <form onSubmit={handleSubmit} className="form">
+                <form id="reset-password-form" onSubmit={handleSubmit} className="form">
                     <div className="form-group" style={{margin: "0 0 1rem"}}>
                         <label htmlFor="password">Password</label>
                         <div style={{position: "relative"}}>
@@ -74,7 +74,7 @@ const ResetPassword = () => {
                                 placeholder="Enter your new password"
                                 required
                             />
-                            <span onClick={togglePasswordVisibility} style={{position: "absolute", top: "0", right: "0", color: "#000", padding: "15px 15px 0px 0px", cursor: "pointer", fontSize: "1.3rem"}} title="Toggle password">{passwordVisible ? <VisibilityOff style={{color: "#3b3939"}}/>  : <Visibility style={{color: "#3b3939"}}/>}</span>
+                            <span id="reset-password-visibility-toggle" onClick={togglePasswordVisibility} style={{position: "absolute", top: "0", right: "0", color: "#000", padding: "15px 15px 0px 0px", cursor: "pointer", fontSize: "1.3rem"}} title="Toggle password">{passwordVisible ? <VisibilityOff style={{color: "#3b3939"}}/>  : <Visibility style={{color: "#3b3939"}}/>}</span>
                         </div>
                     </div>
 
@@ -89,11 +89,11 @@ const ResetPassword = () => {
                                 placeholder="Confirm your new password"
                                 required
                             />
-                            <span onClick={toggleConfirmPasswordVisibility} style={{position: "absolute", top: "0", right: "0", color: "#000", padding: "15px 15px 0px 0px", cursor: "pointer", fontSize: "1.3rem"}} title="Toggle password">{confirmPasswordVisible ? <VisibilityOff style={{color: "#3b3939"}}/> : <Visibility style={{color: "#3b3939"}}/>}</span>
+                            <span id="reset-confirm-password-visibility-toggle" onClick={toggleConfirmPasswordVisibility} style={{position: "absolute", top: "0", right: "0", color: "#000", padding: "15px 15px 0px 0px", cursor: "pointer", fontSize: "1.3rem"}} title="Toggle password">{confirmPasswordVisible ? <VisibilityOff style={{color: "#3b3939"}}/> : <Visibility style={{color: "#3b3939"}}/>}</span>
                         </div>
                     </div>
 
-                    <button className="form-submit-btn" type="submit">Done!</button>
+                    <button id="reset-password-submit" className="form-submit-btn" type="submit">Done!</button>
                 </form>
             </div>
         </div>

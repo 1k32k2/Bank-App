@@ -27,10 +27,10 @@ const AdminUsers = () => {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box id="admin-users-page" sx={{ p: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>All Users</Typography>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer id="admin-users-table-container" component={Paper}>
+        <Table id="admin-users-table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -41,7 +41,7 @@ const AdminUsers = () => {
           </TableHead>
           <TableBody>
             {users.map((u) => (
-              <TableRow key={u._id}>
+              <TableRow id={`admin-user-row-${u._id}`} key={u._id}>
                 <TableCell>{u.firstName} {u.lastName}</TableCell>
                 <TableCell>{u.email}</TableCell>
                 <TableCell>{u.accountNumber}</TableCell>

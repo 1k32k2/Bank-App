@@ -340,10 +340,10 @@ const MainDashboard = () => {
   };
 
   const actions = [
-    { label: "Transfer", icon: <SendIcon />, color: "#4a90e2", bg: "#eef5fc", onClick: handleOpenTransferModal },
-    { label: "To Bank", icon: <AccountBalanceIcon />, color: "#2dbe60", bg: "#eaf9f0", onClick: () => setToBankModalOpen(true) },
-    { label: "Pay Bills", icon: <PaymentsIcon />, color: "#f39c12", bg: "#fef6e7", onClick: () => setPayBillsModalOpen(true) },
-    { label: "Airtime", icon: <PhoneIphoneIcon />, color: "#9b59b6", bg: "#f5eafb", onClick: () => setAirtimeModalOpen(true) },
+    { id: "transfer", label: "Transfer", icon: <SendIcon />, color: "#4a90e2", bg: "#eef5fc", onClick: handleOpenTransferModal },
+    { id: "to-bank", label: "To Bank", icon: <AccountBalanceIcon />, color: "#2dbe60", bg: "#eaf9f0", onClick: () => setToBankModalOpen(true) },
+    { id: "pay-bills", label: "Pay Bills", icon: <PaymentsIcon />, color: "#f39c12", bg: "#fef6e7", onClick: () => setPayBillsModalOpen(true) },
+    { id: "airtime", label: "Airtime", icon: <PhoneIphoneIcon />, color: "#9b59b6", bg: "#f5eafb", onClick: () => setAirtimeModalOpen(true) },
   ];
 
   // Handle transfer submission
@@ -398,7 +398,7 @@ const MainDashboard = () => {
 
   return (
     // MASTER WRAPPER
-    <Box className="main-dashboard-container">
+    <Box id="user-dashboard" className="main-dashboard-container">
 
       {/* 1. Header Section */}
       <Box sx={{ mb: 3, px: 2, pt: 2, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: 'center' }}>
@@ -409,7 +409,7 @@ const MainDashboard = () => {
           <Typography variant="body2" color="textSecondary" sx={{ fontSize: { xs: '1rem', sm: '1.2rem' }, display: 'flex', alignItems: 'center' }}>
             Account Number: {user?.accountNumber || 'N/A'}
             {user?.accountNumber && (
-              <IconButton size="small" onClick={() => copyTextToClipboard(user.accountNumber)} sx={{ ml: 1 }}>
+              <IconButton id="account-number-copy" size="small" onClick={() => copyTextToClipboard(user.accountNumber)} sx={{ ml: 1 }}>
                 <ContentCopyIcon fontSize="small" />
               </IconButton>
             )}
@@ -420,6 +420,7 @@ const MainDashboard = () => {
         </Box>
         {!isSmallMobile && (
           <Button
+            id="dashboard-add-money"
             variant="contained"
             startIcon={<AddIcon />}
             sx={{ borderRadius: '20px', backgroundColor: '#4a90e2', display: { xs: 'block', sm: 'flex' } }}
@@ -440,13 +441,13 @@ const MainDashboard = () => {
           <Box sx={{ p: { xs: 1, md: 3 }, pt: 0 }}>
 
             {/* 2. Balance Card */}
-            <Card className="balance-card glass-effect" sx={{ borderRadius: 4, mb: 3, position: 'relative', overflow: 'hidden' }}>
+            <Card id="dashboard-balance-card" className="balance-card glass-effect" sx={{ borderRadius: 4, mb: 3, position: 'relative', overflow: 'hidden' }}>
               <Box className="card-decoration-circle" />
               {/* Reduced padding inside card for small screens */}
               <CardContent sx={{ position: 'relative', zIndex: 2, color: 'white', p: { xs: 1.5, sm: 4 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                   <Typography variant="body2" sx={{ opacity: 0.8 }}>Total Balance</Typography>
-                  <IconButton onClick={toggleBalance} size="small" sx={{ color: 'white' }}>
+                  <IconButton id="balance-visibility-toggle" onClick={toggleBalance} size="small" sx={{ color: 'white' }}>
                     {showBalance ? <VisibilityIcon fontSize="small" /> : <VisibilityOffIcon fontSize="small" />}
                   </IconButton>
                 </Box>
@@ -456,10 +457,10 @@ const MainDashboard = () => {
                 </Typography>
 
                 <Box sx={{ display: 'flex', gap: 2 }}>
-                  <Button variant="contained" startIcon={<ArrowUpwardIcon />} className="action-btn-primary" sx={{ bgcolor: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', flex: 1 }} onClick={handleOpenWithdrawModal}>
+                  <Button id="dashboard-withdraw" variant="contained" startIcon={<ArrowUpwardIcon />} className="action-btn-primary" sx={{ bgcolor: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', flex: 1 }} onClick={handleOpenWithdrawModal}>
                     Withdraw
                   </Button>
-                  <Button variant="contained" startIcon={<ArrowDownwardIcon />} className="action-btn-primary" sx={{ bgcolor: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', flex: 1 }} onClick={handleOpenReceiveModal}>
+                  <Button id="dashboard-receive" variant="contained" startIcon={<ArrowDownwardIcon />} className="action-btn-primary" sx={{ bgcolor: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', flex: 1 }} onClick={handleOpenReceiveModal}>
                     Receive
                   </Button>
                 </Box>
@@ -471,9 +472,10 @@ const MainDashboard = () => {
 
             {/* FIX: Reduced spacing to 1 (8px) on mobile to prevent negative margin overflow */}
             <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ mb: 3 }}>
-              {actions.map((action, index) => (
-                <Grid item xs={12} sm={6} key={index}>
+              {actions.map((action) => (
+                <Grid item xs={12} sm={6} key={action.id}>
                   <Card
+                    id={`dashboard-action-${action.id}`}
                     className="action-card"
                     sx={{
                       borderRadius: 3,
@@ -499,7 +501,7 @@ const MainDashboard = () => {
             </Grid>
 
             {/* 4. Statistics Chart */}
-            <Card className="statistics-card" sx={{ borderRadius: 4, boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+            <Card id="dashboard-analytics" className="statistics-card" sx={{ borderRadius: 4, boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
               <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                   <Typography variant="h6" fontWeight={600}>Analytics</Typography>
@@ -518,17 +520,17 @@ const MainDashboard = () => {
         <Grid item xs={12} md={4}>
           <Box sx={{ p: { xs: 1, md: 3 }, pt: 0, pl: { md: 0 } }}>
             {/* 5. Transactions */}
-            <Card className="transactions-card" sx={{ borderRadius: 4, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+            <Card id="dashboard-recent-transactions" className="transactions-card" sx={{ borderRadius: 4, height: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
               <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                   <Typography variant="h6" fontWeight={600}>Transactions</Typography>
-                  <Button size="small" component={Link} to="/dashboard/user/transactions">See All</Button>
+                  <Button id="dashboard-see-all-transactions" size="small" component={Link} to="/dashboard/user/transactions">See All</Button>
                 </Box>
 
                 <List sx={{ width: '100%', bgcolor: 'background.paper', p: 0 }}>
                   {recentTransactions.length > 0 ? recentTransactions.map((t) => (
                     <React.Fragment key={t._id}>
-                      <ListItem disableGutters sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0' }}>
+                      <ListItem id={`dashboard-transaction-${t._id}`} disableGutters sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0' }}>
                         <ListItemAvatar sx={{ minWidth: 50 }}>
                           <Avatar sx={{ bgcolor: t.type === 'deposit' ? '#eaf9f0' : t.type === 'withdraw' ? '#fdeded' : '#eef5fc', color: t.type === 'deposit' ? '#2dbe60' : t.type === 'withdraw' ? '#e74c3c' : '#4a90e2', width: 35, height: 35 }}>
                             {t.description?.charAt(0) || t.type.charAt(0).toUpperCase()}
@@ -550,7 +552,7 @@ const MainDashboard = () => {
                               {t.type === 'deposit' || (t.type === 'transfer' && t.senderAccount) ? '+' : '-'}₦{t.amount}
                             </Typography>
                             {t.type === 'transfer' && (
-                              <IconButton size="small" onClick={() => handleAddFromTransaction(t)}>
+                              <IconButton id={`dashboard-add-beneficiary-${t._id}`} size="small" onClick={() => handleAddFromTransaction(t)}>
                                 <PersonAddIcon fontSize="small" />
                               </IconButton>
                             )}
@@ -568,15 +570,15 @@ const MainDashboard = () => {
             </Card>
 
             {/* Beneficiary card */}
-            <Card className="beneficiary-card" sx={{ borderRadius: 4, height: '100%', marginTop: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+            <Card id="dashboard-beneficiaries" className="beneficiary-card" sx={{ borderRadius: 4, height: '100%', marginTop: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
               <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                   <Typography variant="h6" fontWeight={600}>Beneficiaries</Typography>
-                  {beneficiaries.length > 0 && (<Button size="small" onClick={() => setBeneficiariesModalOpen(true)}>See All</Button>)}
+                  {beneficiaries.length > 0 && (<Button id="dashboard-see-all-beneficiaries" size="small" onClick={() => setBeneficiariesModalOpen(true)}>See All</Button>)}
                 </Box>
                 <List sx={{ width: '100%', bgcolor: 'background.paper', p: 0 }}>
                   {beneficiaries.slice(0, 3).map((b) => (
-                    <ListItem key={b._id} sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0', cursor: 'pointer' }}>
+                    <ListItem id={`dashboard-beneficiary-${b._id}`} key={b._id} sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0', cursor: 'pointer' }}>
                       <div onClick={() => handleBeneficiaryTransfer(b)}>
                         <ListItemAvatar>
                           <Avatar sx={{ bgcolor: '#eef5fc', color: '#4a90e2' }}>
@@ -589,7 +591,7 @@ const MainDashboard = () => {
                           <Typography variant="body2" color="textSecondary">{b.bankName}</Typography>
                         </Box>
                       </div>
-                      <IconButton onClick={() => handleRemoveBeneficiary(b._id)}>
+                      <IconButton id={`dashboard-remove-beneficiary-${b._id}`} onClick={() => handleRemoveBeneficiary(b._id)}>
                         <DeleteIcon />
                       </IconButton>
                     </ListItem>
@@ -597,7 +599,7 @@ const MainDashboard = () => {
                   {beneficiaries.length === 0 && (
                     <Typography variant="body2" color="textSecondary" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: '1rem' }}>
                       No beneficiaries yet.
-                      <Button size="small" onClick={() => setBeneficiariesModalOpen(true)} sx={{ mt: '.4rem' }}>Add a beneficiary</Button>
+                      <Button id="dashboard-add-beneficiary" size="small" onClick={() => setBeneficiariesModalOpen(true)} sx={{ mt: '.4rem' }}>Add a beneficiary</Button>
                     </Typography>
                   )}
                 </List>
@@ -610,6 +612,7 @@ const MainDashboard = () => {
 
       {/* Receive Modal */}
       <Dialog
+        id="receive-money-dialog"
         open={receiveModalOpen}
         onClose={handleCloseReceiveModal}
         fullWidth
@@ -626,12 +629,12 @@ const MainDashboard = () => {
             <Typography variant="subtitle2">Account Number: {user?.accountNumber}</Typography>
             <Typography variant="subtitle2">Bank: NairaNest</Typography>
           </Box>
-          <Button variant="outlined" onClick={() => copyTextToClipboard(`Name: ${user?.firstName} ${user?.lastName}\nAccount Number: ${user?.accountNumber}\nBank: NairaNest`)}>
+          <Button id="receive-money-copy-details" variant="outlined" onClick={() => copyTextToClipboard(`Name: ${user?.firstName} ${user?.lastName}\nAccount Number: ${user?.accountNumber}\nBank: NairaNest`)}>
             Copy Details
           </Button>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseReceiveModal} color="secondary">
+          <Button id="receive-money-close" onClick={handleCloseReceiveModal} color="secondary">
             Close
           </Button>
         </DialogActions>
@@ -640,6 +643,7 @@ const MainDashboard = () => {
 
       {/* Deposit Modal */}
       <Dialog
+        id="deposit-money-dialog"
         open={depositModalOpen}
         onClose={handleCloseDepositModal}
         fullWidth
@@ -652,6 +656,7 @@ const MainDashboard = () => {
             Enter the amount you want to deposit. This is a simulation, no real payment required.
           </Typography>
           <TextField
+            id="deposit-amount"
             autoFocus
             margin="dense"
             label="Amount (₦)"
@@ -664,10 +669,11 @@ const MainDashboard = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDepositModal} color="secondary">
+          <Button id="deposit-cancel" onClick={handleCloseDepositModal} color="secondary">
             Cancel
           </Button>
           <Button
+            id="deposit-submit"
             onClick={handleDeposit}
             variant="contained"
             disabled={isDepositing}
@@ -680,6 +686,7 @@ const MainDashboard = () => {
 
       {/* Withdraw Modal */}
       <Dialog
+        id="withdraw-money-dialog"
         open={withdrawModalOpen}
         onClose={handleCloseWithdrawModal}
         fullWidth
@@ -692,6 +699,7 @@ const MainDashboard = () => {
             Enter the amount you want to withdraw. Ensure sufficient balance.
           </Typography>
           <TextField
+            id="withdraw-amount"
             autoFocus
             margin="dense"
             label="Amount (₦)"
@@ -704,10 +712,11 @@ const MainDashboard = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseWithdrawModal} color="secondary">
+          <Button id="withdraw-cancel" onClick={handleCloseWithdrawModal} color="secondary">
             Cancel
           </Button>
           <Button
+            id="withdraw-submit"
             onClick={handleWithdraw}
             variant="contained"
             disabled={isWithdrawing}
@@ -720,6 +729,7 @@ const MainDashboard = () => {
 
       {/* Transfer Modal */}
       <Dialog
+        id="transfer-money-dialog"
         open={transferModalOpen}
         onClose={handleCloseTransferModal}
         fullWidth
@@ -732,6 +742,7 @@ const MainDashboard = () => {
             Enter recipient account number and amount. Ensure sufficient balance.
           </Typography>
           <TextField
+            id="transfer-account-number"
             autoFocus
             margin="dense"
             label="Recipient Account Number"
@@ -742,6 +753,7 @@ const MainDashboard = () => {
             onChange={(e) => setTransferData({ ...transferData, accountNumber: e.target.value })}
           />
           <TextField
+            id="transfer-amount"
             margin="dense"
             label="Amount (₦)"
             type="number"
@@ -752,6 +764,7 @@ const MainDashboard = () => {
             inputProps={{ min: 0, step: 0.01 }}
           />
           <TextField
+            id="transfer-description"
             margin="dense"
             label="Description (Optional)"
             type="text"
@@ -762,10 +775,11 @@ const MainDashboard = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseTransferModal} color="secondary">
+          <Button id="transfer-cancel" onClick={handleCloseTransferModal} color="secondary">
             Cancel
           </Button>
           <Button
+            id="transfer-submit"
             onClick={handleTransfer}
             variant="contained"
             disabled={isTransferring}
@@ -778,6 +792,7 @@ const MainDashboard = () => {
 
       {/* Add Beneficiaries Modal */}
       <Dialog
+        id="manage-beneficiaries-dialog"
         open={beneficiariesModalOpen}
         onClose={() => setBeneficiariesModalOpen(false)}
         fullWidth
@@ -791,6 +806,7 @@ const MainDashboard = () => {
           </Typography>
           <Box sx={{ mb: 3 }}>
             <TextField
+              id="new-beneficiary-name"
               fullWidth
               label="Name"
               value={newBeneficiary.name}
@@ -798,18 +814,21 @@ const MainDashboard = () => {
               sx={{ mb: 1 }}
             />
             <TextField
+              id="new-beneficiary-account-number"
               fullWidth
               label="Account Number"
               value={newBeneficiary.accountNumber}
               onChange={(e) => setNewBeneficiary({ ...newBeneficiary, accountNumber: e.target.value })}
             />
             <TextField
+              id="new-beneficiary-bank-name"
               fullWidth
               label="Bank Name"
               value={newBeneficiary.bankName}
               onChange={(e) => setNewBeneficiary({ ...newBeneficiary, bankName: e.target.value })}
             />
             <Button
+              id="new-beneficiary-submit"
               variant="contained"
               startIcon={<PersonAddIcon />}
               onClick={handleAddBeneficiary}
@@ -820,7 +839,7 @@ const MainDashboard = () => {
           </Box>
           <List>
             {beneficiaries.map((b) => (
-              <ListItem key={b._id} sx={{ borderBottom: '1px solid #f0f0f0', cursor: 'pointer' }}>
+              <ListItem id={`manage-beneficiary-${b._id}`} key={b._id} sx={{ borderBottom: '1px solid #f0f0f0', cursor: 'pointer' }}>
                 <div onClick={() => handleBeneficiaryTransfer(b)}>
                   <ListItemAvatar>
                     <Avatar sx={{ bgcolor: '#eef5fc', color: '#4a90e2' }}>
@@ -833,7 +852,7 @@ const MainDashboard = () => {
                     <Typography variant="body2" color="textSecondary">{b.bankName}</Typography>
                   </Box>
                 </div>
-                <IconButton onClick={() => handleRemoveBeneficiary(b._id)}>
+                <IconButton id={`manage-remove-beneficiary-${b._id}`} onClick={() => handleRemoveBeneficiary(b._id)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItem>
@@ -841,28 +860,28 @@ const MainDashboard = () => {
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setBeneficiariesModalOpen(false)} color="secondary">
+          <Button id="manage-beneficiaries-close" onClick={() => setBeneficiariesModalOpen(false)} color="secondary">
             Close
           </Button>
         </DialogActions>
       </Dialog>
 
-      <Dialog open={toBankModalOpen} onClose={() => setToBankModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
+      <Dialog id="to-bank-dialog" open={toBankModalOpen} onClose={() => setToBankModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
         <DialogTitle>To Bank</DialogTitle>
         <DialogContent><Typography>Feature coming soon!</Typography></DialogContent>
-        <DialogActions><Button onClick={() => setToBankModalOpen(false)}>Close</Button></DialogActions>
+        <DialogActions><Button id="to-bank-close" onClick={() => setToBankModalOpen(false)}>Close</Button></DialogActions>
       </Dialog>
 
-      <Dialog open={payBillsModalOpen} onClose={() => setPayBillsModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
+      <Dialog id="pay-bills-dialog" open={payBillsModalOpen} onClose={() => setPayBillsModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
         <DialogTitle>Pay Bills</DialogTitle>
         <DialogContent><Typography>Feature coming soon!</Typography></DialogContent>
-        <DialogActions><Button onClick={() => setPayBillsModalOpen(false)}>Close</Button></DialogActions>
+        <DialogActions><Button id="pay-bills-close" onClick={() => setPayBillsModalOpen(false)}>Close</Button></DialogActions>
       </Dialog>
 
-      <Dialog open={airtimeModalOpen} onClose={() => setAirtimeModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
+      <Dialog id="airtime-dialog" open={airtimeModalOpen} onClose={() => setAirtimeModalOpen(false)} fullWidth maxWidth="sm" sx={{ '& .MuiDialog-paper': { borderRadius: 3 } }}>
         <DialogTitle>Airtime</DialogTitle>
         <DialogContent><Typography>Feature coming soon!</Typography></DialogContent>
-        <DialogActions><Button onClick={() => setAirtimeModalOpen(false)}>Close</Button></DialogActions>
+        <DialogActions><Button id="airtime-close" onClick={() => setAirtimeModalOpen(false)}>Close</Button></DialogActions>
       </Dialog>
     </Box>
   );

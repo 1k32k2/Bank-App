@@ -14,13 +14,13 @@ const Modal = ({ show, onClose, onConfirm }) => {
     if (!show) return null;
 
   return (
-    <div style={{zIndex: '1000'}} className={`modal-overlay ${isExiting ? 'fadeOut' : 'fadeIn'}`} onClick={handleClose}>
+    <div id="logout-confirmation-overlay" style={{zIndex: '1000'}} className={`modal-overlay ${isExiting ? 'fadeOut' : 'fadeIn'}`} onClick={handleClose}>
         <div className={`modal ${isExiting ? 'slideOut' : 'slideIn'}`} onClick={(e) => e.stopPropagation()}>
             <h2>Confirmation</h2>
             <hr />
             <p>Are you sure you want to log out?</p>
-            <button onClick={onConfirm} className="yes-btn">OK</button>
-            <button onClick={handleClose} className="cancel-btn">Cancel</button>
+            <button id="logout-confirm-button" onClick={onConfirm} className="yes-btn">OK</button>
+            <button id="logout-cancel-button" onClick={handleClose} className="cancel-btn">Cancel</button>
         </div>
     </div>
   )

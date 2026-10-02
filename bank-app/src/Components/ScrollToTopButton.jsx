@@ -30,6 +30,7 @@ const ScrollToTopButton = () => {
     <div>
       {visible && (
         <Fab
+          id="scroll-to-top-button"
           color=''
           size='small'
           onClick={scrollToTop}

@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 const ConfirmModal = ({ isOpen, onRequestClose, onConfirm }) => {
   return (
     <Modal
+      id="confirm-logout-dialog"
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Confirm Logout"
@@ -22,8 +23,8 @@ const ConfirmModal = ({ isOpen, onRequestClose, onConfirm }) => {
     >
       <h2>Confirm Logout</h2>
       <p>Are you sure you want to log out?</p>
-      <button onClick={onConfirm}>Yes</button>
-      <button onClick={onRequestClose}>Cancel</button>
+      <button id="confirm-logout-yes" onClick={onConfirm}>Yes</button>
+      <button id="confirm-logout-cancel" onClick={onRequestClose}>Cancel</button>
     </Modal>
   );
 };

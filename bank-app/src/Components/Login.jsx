@@ -201,6 +201,7 @@ const Login = () => {
                     {lockoutMessage && <div style={{ color: 'red', marginBottom: '1rem' }}>{lockoutMessage}</div>}  {/* Display lockout message */}
                     {warningMessage && <div style={{ color: 'orange', marginBottom: '1rem' }}>{warningMessage}</div>}  {/* Display warning message */}
                     <Box
+                        id="login-form"
                         onSubmit={formik.handleSubmit}
                         component="form"
                         sx={{
@@ -238,6 +239,7 @@ const Login = () => {
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
+                                            id="login-password-toggle"
                                             aria-label='toggle password visibility'
                                             onClick={handleClickShowPassword}
                                             onMouseDown={handleMouseDownPassword}
@@ -252,13 +254,14 @@ const Login = () => {
 
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: ".5rem 0" }}>
                             <FormControlLabel
-                                control={<Checkbox size='small' checked={rememberMe} onChange={handleRememberMeChange} />}
+                                control={<Checkbox id="login-remember-me" size='small' checked={rememberMe} onChange={handleRememberMeChange} />}
                                 label="Remember Me"
                                 value="Remember Me"
                             />
-                            <Link to="/forgot-password" style={{ color: "#4a90e2", fontSize: ".9rem", textDecoration: "none" }}>Forgot Password?</Link>
+                            <Link id="login-forgot-password" to="/forgot-password" style={{ color: "#4a90e2", fontSize: ".9rem", textDecoration: "none" }}>Forgot Password?</Link>
                         </Box>
                         <LoadingButton
+                            id="login-submit"
                             style={{
                                 backgroundColor: isLockedOut ? "#ccc" : "#4a90e2",
                                 width: "100%",
@@ -276,7 +279,7 @@ const Login = () => {
                         </LoadingButton>
 
                     </Box>
-                    <p style={{ color: "#92a4af", textAlign: "center", fontSize: ".9rem" }}>Don&#39;t have an account? <Link to="/signup" style={{ textDecoration: "none", color: "inherit" }}><span style={{ color: "#4a90e2" }} className='link' >Sign Up</span></Link></p>
+                    <p style={{ color: "#92a4af", textAlign: "center", fontSize: ".9rem" }}>Don&#39;t have an account? <Link id="login-signup-link" to="/signup" style={{ textDecoration: "none", color: "inherit" }}><span style={{ color: "#4a90e2" }} className='link' >Sign Up</span></Link></p>
                 </Box>
             </Grid>
         </Grid>

@@ -82,7 +82,7 @@ const Account = () => {
     if (loading) return <Typography>Loading...</Typography>;
 
     return (
-        <Box sx={{ maxWidth: '800px', margin: '0 auto' }}>
+        <Box id="account-page" sx={{ maxWidth: '800px', margin: '0 auto' }}>
             <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: '#34495e' }}>
                 Profile Settings
             </Typography>
@@ -107,6 +107,7 @@ const Account = () => {
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id="account-first-name"
                                         fullWidth
                                         label="First Name"
                                         value={profileData.firstName}
@@ -119,6 +120,7 @@ const Account = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id="account-last-name"
                                         fullWidth
                                         label="Last Name"
                                         value={profileData.lastName}
@@ -131,6 +133,7 @@ const Account = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        id="account-email"
                                         fullWidth
                                         label="Email"
                                         defaultValue={userInfo?.email || "user@example.com"}
@@ -141,6 +144,7 @@ const Account = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id="account-phone"
                                         fullWidth
                                         label="Phone"
                                         value={profileData.phone} onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
@@ -150,6 +154,7 @@ const Account = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        id="account-number"
                                         fullWidth
                                         label="Account Number"
                                         defaultValue={userInfo?.accountNumber || ""}
@@ -160,10 +165,10 @@ const Account = () => {
                             </Grid>
 
                             <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                                <Button variant="contained" startIcon={<Edit />} onClick={isEditing ? handleSave : handleEdit} sx={{ bgcolor: '#4a90e2', borderRadius: '20px' }}>
+                                <Button id="account-save-or-edit" variant="contained" startIcon={<Edit />} onClick={isEditing ? handleSave : handleEdit} sx={{ bgcolor: '#4a90e2', borderRadius: '20px' }}>
                                     {isEditing ? 'Save' : 'Edit Profile'}
                                 </Button>
-                                {isEditing && <Button onClick={handleCancel} sx={{ ml: 1 }}>Cancel</Button>}
+                                {isEditing && <Button id="account-cancel-edit" onClick={handleCancel} sx={{ ml: 1 }}>Cancel</Button>}
                             </Box>
                         </CardContent>
                     </Card>

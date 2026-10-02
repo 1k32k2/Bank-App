@@ -31,7 +31,7 @@ const AdminOverview = () => {
     }, [user]);
 
     return (
-        <Box sx={{ p: 3 }}>
+        <Box id="admin-overview" sx={{ p: 3 }}>
             <Box sx={{ mb: 3, px: 2, pt: 2, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box>
                     <Typography variant="h5" sx={{ fontWeight: 700, color: '#34495e', fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
@@ -45,7 +45,7 @@ const AdminOverview = () => {
 
             <Grid container spacing={3} sx={{ mb: 3 }}>
                 <Grid item xs={12} sm={6}>
-                    <Card sx={{ borderRadius: 3, boxShadow: 2 }}>
+                    <Card id="admin-user-count-card" sx={{ borderRadius: 3, boxShadow: 2 }}>
                         <CardContent sx={{ textAlign: 'center' }}>
                             <PeopleIcon sx={{ fontSize: 40, color: '#4a90e2', mb: 1 }} />
                             <Typography variant="h4" sx={{ fontWeight: 600 }}>{userCount}</Typography>
@@ -54,7 +54,7 @@ const AdminOverview = () => {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Card sx={{ borderRadius: 3, boxShadow: 2 }}>
+                    <Card id="admin-transaction-count-card" sx={{ borderRadius: 3, boxShadow: 2 }}>
                         <CardContent sx={{ textAlign: 'center' }}>
                             <ReceiptIcon sx={{ fontSize: 40, color: '#2dbe60', mb: 1 }} />
                             <Typography variant="h4" sx={{ fontWeight: 600 }}>{transactionCount}</Typography>
@@ -66,10 +66,10 @@ const AdminOverview = () => {
 
             <Grid container spacing={2}>
                 <Grid item>
-                    <Button variant="contained" component={Link} to="/dashboard/admin/users">View All Users</Button>
+                    <Button id="admin-view-users" variant="contained" component={Link} to="/dashboard/admin/users">View All Users</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" component={Link} to="/dashboard/admin/transactions">View All Transactions</Button>
+                    <Button id="admin-view-transactions" variant="contained" component={Link} to="/dashboard/admin/transactions">View All Transactions</Button>
                 </Grid>
             </Grid>
         </Box>

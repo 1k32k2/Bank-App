@@ -43,13 +43,13 @@ const EmailCheck = () => {
     // Default message if email is not provided
 
     return (
-        <Container>
+        <Container id="email-check-page">
             <div>
                 <MdOutlineMarkEmailUnread style={{fontSize: "3.5rem", color: "#4a90e2"}}/>
             </div>
-            <Message>Check your email</Message>
+            <Message id="email-check-message">Check your email</Message>
             <p style={{color: "#78838f", margin: "1rem 0 5rem"}}>We&apos;ve sent instructions on how to reset your password to <span style={{color: "#000", fontWeight: "600"}}>{email}.</span> </p>
-            <p style={{color: "#78838f", fontSize: ".8rem"}}>Redirecting to login page in {countdown} seconds...</p>
+            <p id="email-check-countdown" style={{color: "#78838f", fontSize: ".8rem"}}>Redirecting to login page in {countdown} seconds...</p>
         </Container>
     );
 };

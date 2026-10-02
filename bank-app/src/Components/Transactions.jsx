@@ -144,17 +144,17 @@ const Transactions = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box id="transactions-page" sx={{ p: 3 }}>
       <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>Transaction History</Typography>
 
       {/* Filters */}
-      <Card sx={{ mb: 3, p: 2 }} className='filter-card'>
+      <Card id="transaction-filters" sx={{ mb: 3, p: 2 }} className='filter-card'>
         <Typography variant="h6" sx={{ mb: 2 }}>Filters</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl fullWidth>
-              <InputLabel>Time</InputLabel>
-              <Select name="time" value={filters.time} onChange={handleFilterChange}>
+              <InputLabel id="transaction-time-filter-label">Time</InputLabel>
+              <Select id="transaction-time-filter" labelId="transaction-time-filter-label" name="time" value={filters.time} onChange={handleFilterChange}>
                 <MenuItem value="all">All</MenuItem>
                 <MenuItem value="today">Today</MenuItem>
                 <MenuItem value="yesterday">Yesterday</MenuItem>
@@ -165,8 +165,8 @@ const Transactions = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
-              <Select name="status" value={filters.status} onChange={handleFilterChange}>
+              <InputLabel id="transaction-status-filter-label">Status</InputLabel>
+              <Select id="transaction-status-filter" labelId="transaction-status-filter-label" name="status" value={filters.status} onChange={handleFilterChange}>
                 <MenuItem value="all">All</MenuItem>
                 <MenuItem value="pending">Pending</MenuItem>
                 <MenuItem value="completed">Completed</MenuItem>
@@ -175,8 +175,8 @@ const Transactions = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl fullWidth>
-              <InputLabel>Type</InputLabel>
-              <Select name="type" value={filters.type} onChange={handleFilterChange}>
+              <InputLabel id="transaction-type-filter-label">Type</InputLabel>
+              <Select id="transaction-type-filter" labelId="transaction-type-filter-label" name="type" value={filters.type} onChange={handleFilterChange}>
                 <MenuItem value="all">All</MenuItem>
                 <MenuItem value="deposit">Deposit</MenuItem>
                 <MenuItem value="withdraw">Withdraw</MenuItem>
@@ -185,23 +185,23 @@ const Transactions = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField fullWidth label="Search (Description/Account)" name="search" value={filters.search} onChange={handleFilterChange} />
+            <TextField id="transaction-search" fullWidth label="Search (Description/Account)" name="search" value={filters.search} onChange={handleFilterChange} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="Min Amount" name="minAmount" type="number" value={filters.minAmount} onChange={handleFilterChange} />
+            <TextField id="transaction-min-amount" fullWidth label="Min Amount" name="minAmount" type="number" value={filters.minAmount} onChange={handleFilterChange} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="Max Amount" name="maxAmount" type="number" value={filters.maxAmount} onChange={handleFilterChange} />
+            <TextField id="transaction-max-amount" fullWidth label="Max Amount" name="maxAmount" type="number" value={filters.maxAmount} onChange={handleFilterChange} />
           </Grid>
         </Grid>
       </Card>
 
       {/* Transactions List */}
-      <Card className='all-transactions-card'>
+      <Card id="transaction-results" className='all-transactions-card'>
         <CardContent>
           <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {filteredTransactions.length > 0 ? paginatedTransactions.map((t) => (
-              <ListItem key={t._id} sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0' }}>
+              <ListItem id={`transaction-row-${t._id}`} key={t._id} sx={{ py: 1.5, borderBottom: '1px solid #f0f0f0' }}>
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: t.type === 'deposit' ? '#eaf9f0' : t.type === 'withdraw' ? '#fdeded' : '#eef5fc', color: t.type === 'deposit' ? '#2dbe60' : t.type === 'withdraw' ? '#e74c3c' : '#4a90e2' }}>
                     {t.description?.charAt(0) || t.type.charAt(0).toUpperCase()}
@@ -221,7 +221,7 @@ const Transactions = () => {
                       {t.type === 'deposit' || (t.type === 'transfer' && t.senderAccount) ? '+' : '-'}₦{t.amount}
                     </Typography>
                     {t.type === 'transfer' && (
-                      <IconButton size="small" onClick={() => handleAddFromTransaction(t)}>
+                      <IconButton id={`transaction-add-beneficiary-${t._id}`} size="small" onClick={() => handleAddFromTransaction(t)}>
                         <PersonAddIcon fontSize="small" />
                       </IconButton>
                     )}
@@ -236,7 +236,7 @@ const Transactions = () => {
           </List>
           {totalPages > 1 && (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-              <Pagination count={totalPages} page={page} onChange={(e, value) => setPage(value)} />
+              <Pagination id="transaction-pagination" count={totalPages} page={page} onChange={(e, value) => setPage(value)} />
             </Box>
           )}
         </CardContent>

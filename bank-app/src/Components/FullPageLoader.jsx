@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 
 const FullPageLoader = () => (
   <Box
+    id="full-page-loader"
     sx={{
       display: 'flex',
       alignItems: 'center',

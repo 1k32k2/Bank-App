@@ -112,14 +112,15 @@ function AdminLayout() {
     const handleClose = () => { setAnchorEl(null); };
 
     // Sidebar Content Component to avoid duplication
-    const drawerContent = (
+    const drawerContent = (variant) => (
         <div style={{ backgroundColor: SIDEBAR_BG, height: "100%", color: "#fff" }}>
-            <Link to="/">
+            <Link id={`admin-${variant}-logo-link`} to="/">
                 <img src={Logo} style={{ width: "100%", height: "6rem", objectFit: "contain", margin: "1rem auto 0", cursor: "pointer" }} alt="NairaNest Logo" />
             </Link>
             <List sx={{ paddingX: "1rem" }}>
                 {menuItems.map(item => (
                     <NavLink
+                        id={`admin-${variant}-nav-${item.text.toLowerCase()}`}
                         to={item.path}
                         key={item.text}
                         end={true}  // Add this: Forces exact matching (only active if path matches exactly)
@@ -146,7 +147,7 @@ function AdminLayout() {
                 ))}
 
                 <Box sx={{ mt: 5 }}>
-                    <ListItemButton onClick={openModal} sx={{ color: "#e74c3c", borderRadius: '8px' }}>
+                    <ListItemButton id={`admin-${variant}-logout`} onClick={openModal} sx={{ color: "#e74c3c", borderRadius: '8px' }}>
                         <ListItemIcon sx={{ color: "#e74c3c", minWidth: '40px' }}><LogoutIcon /></ListItemIcon>
                         <ListItemText primary="Logout" />
                     </ListItemButton>
@@ -156,7 +157,7 @@ function AdminLayout() {
     );
 
     return (
-        <Box sx={{ display: "flex", backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
+        <Box id="admin-dashboard-layout" sx={{ display: "flex", backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
             <CssBaseline />
 
             {/* Header / App Bar */}
@@ -173,6 +174,7 @@ function AdminLayout() {
             >
                 <Toolbar>
                     <IconButton
+                        id="admin-mobile-menu-toggle"
                         color="inherit"
                         edge="start"
                         onClick={handleToggle}
@@ -188,7 +190,7 @@ function AdminLayout() {
                         ) : (
                             <AccountCircle color="action" />
                         )}
-                        <IconButton onClick={handleMenu} color="inherit" size="small">
+                        <IconButton id="admin-account-menu-toggle" onClick={handleMenu} color="inherit" size="small">
                             <Typography variant="body2" sx={{ fontWeight: 600, mr: 0.5 }}>{user?.firstName || 'User'}</Typography>
                             <KeyboardArrowDownIcon fontSize="small" />
                         </IconButton>
@@ -203,15 +205,15 @@ function AdminLayout() {
                             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                         >
-                            <MenuItem onClick={handleClose}><Link to="/dashboard/account" style={{ textDecoration: "none", color: "inherit" }}>Profile</Link></MenuItem>
-                            <MenuItem onClick={openModal}>Logout</MenuItem>
+                            <MenuItem id="admin-profile-menu-item" onClick={handleClose}><Link id="admin-profile-link" to="/dashboard/account" style={{ textDecoration: "none", color: "inherit" }}>Profile</Link></MenuItem>
+                            <MenuItem id="admin-logout-menu-item" onClick={openModal}>Logout</MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>
             </AppBar>
 
             {/* Sidebar Logic */}
-            <Box component="nav" sx={{ width: { sm: drawWidth }, flexShrink: { sm: 0 } }}>
+            <Box id="admin-sidebar" component="nav" sx={{ width: { sm: drawWidth }, flexShrink: { sm: 0 } }}>
                 {/* Mobile Drawer */}
                 <Drawer
                     variant="temporary"
@@ -223,7 +225,7 @@ function AdminLayout() {
                         "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawWidth },
                     }}
                 >
-                    {drawerContent}
+                    {drawerContent("mobile")}
                 </Drawer>
                 {/* Desktop Drawer */}
                 <Drawer
@@ -234,12 +236,12 @@ function AdminLayout() {
                     }}
                     open
                 >
-                    {drawerContent}
+                    {drawerContent("desktop")}
                 </Drawer>
             </Box>
 
             {/* Main Content Area */}
-            <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawWidth}px)` }, mt: 6 }}>
+            <Box id="admin-main" component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawWidth}px)` }, mt: 6 }}>
                 <Outlet />
                 <Modal show={showModal} onClose={closeModal} onConfirm={handleLogout} />
             </Box>
